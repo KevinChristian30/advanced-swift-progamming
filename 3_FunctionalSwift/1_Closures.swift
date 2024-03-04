@@ -35,3 +35,31 @@ print(stringClosure())
 
 var stringClosureWithoutParameter: () -> String = { "String" }
 print(stringClosureWithoutParameter())
+
+// Closures can be returned by functions
+func returnClosure() -> ((Int, Int) -> Int) {
+  return addClosure
+}
+let returnedClosure = returnClosure()
+
+print(returnedClosure(10, 10))
+print(returnClosure()(5, 5))
+
+func returnClosureDirectly() -> ((Int, Int) -> Int) {
+  return {
+    (number1, number2) in number1 + number2
+  }
+}
+let directlyReturnedClosure = returnClosureDirectly()
+print(directlyReturnedClosure(10, 10))
+print(returnClosureDirectly()(15, 15))
+
+// Closures can be passed to functions
+func insertClosureBlock(closureBlock: () -> String) {
+  print(closureBlock())
+}
+
+insertClosureBlock(closureBlock: stringClosure)
+insertClosureBlock(closureBlock: { () in return "String 1" })
+insertClosureBlock(closureBlock: { return "String 2" })
+insertClosureBlock(closureBlock: { "String 3" })
