@@ -30,7 +30,7 @@ struct Product<T> {
 struct NestedProduct<T> {
   // Normal enums are within one another, so there is a cyclical dependency
   // By making it indirect, it has a reference to each other to break the cyclical dependency
-  // This is a bug in swift
+  // This is a bug in swift, when we recurse enums
   indirect enum Gadget { 
     case smartphone
     case laptop
